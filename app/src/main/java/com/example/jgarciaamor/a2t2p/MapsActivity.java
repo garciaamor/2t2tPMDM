@@ -36,9 +36,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleApiClient apiClient;
     private static final String LOGTAG = "android-localizacion";
 
-    //Circulo con radio de 100m
-    //y centro (42.236954, -8.712717)
+
+
     LatLng center = new LatLng(42.23701647941035, -8.71255248785019);
+    //El radio del circulo de cercania está fijado en 100 metros y las coordenadas del centro son las indicadas arriba
     int radius = 100;
 
     @Override
@@ -71,7 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tesoro));
         marcaT.setVisible(false);
 
-        // Controles UI
+
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
@@ -98,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .strokeColor(Color.parseColor("#0D47A1"))
                 .strokeWidth(4)
                 .fillColor(Color.argb(32, 33, 150, 243));
-        // Añadir círculo
+
         Circle circle = mMap.addCircle(circleOptions);
     }
 
@@ -106,18 +107,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == LOCATION_REQUEST_CODE) {
-            // ¿Permisos asignados?
+
             if (permissions.length > 0 &&
                     permissions[0].equals(android.Manifest.permission.ACCESS_FINE_LOCATION) &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+
                     return;
                 }
                 mMap.setMyLocationEnabled(true);
@@ -142,9 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void calcularDistancia() {
-        /*String la= String.valueOf(lat1);
-        String lo =String.valueOf(lng1);
-        Toast.makeText(this, la+" "+lo, Toast.LENGTH_LONG).show();*/
+
 
         double earthRadius = 6372.795477598;
 
