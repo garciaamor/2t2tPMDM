@@ -46,7 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -63,12 +63,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        //activar la escucha para detectar si pulsamos la pantalla y que nos salan las coordenadas
+
         mMap.setOnMapClickListener(this);
-        // Add a marker in vigo and move the camera
+
         LatLng tesoro = new LatLng(lat2, lng2);
 
         marcaT = mMap.addMarker(new MarkerOptions().position(tesoro).title("Tesoro").snippet("Marca Tesoro"));
+        //Añadir la marca de la posicion del tesoro
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tesoro));
         marcaT.setVisible(false);
 
@@ -155,10 +156,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(this, distancia+" metros ", Toast.LENGTH_LONG).show();
 
 
-
+        //Si la distancia entre nuestra posición y la marca del tesoro es menor de 20 metros, dicha marca será visible
         if(distMet<=20){
             marcaT.setVisible(true);
         }else {
+            //En el caso de que la distancia sea mayor de 20 metros, la marca permanecerá oculta.
             marcaT.setVisible(false);
         }
 
