@@ -157,6 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double dist = earthRadius * c;
         double distMet=dist*1000;
         String distancia=String.valueOf(distMet);
+        //Es metodo calcula la distancia a la marca que tenemos que encontrar
 
         Toast.makeText(this, distancia+" metros ", Toast.LENGTH_LONG).show();
 
