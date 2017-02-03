@@ -30,15 +30,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     public static final int LOCATION_REQUEST_CODE = 1;
     public static double lat1, lng1;
-    public static double lat2 = 42.236323;
-    public static double lng2 = -8.712158;
+    public static double lat2 = 42.23701647941035;
+    public static double lng2 = -8.71255248785019;
     public static Marker marcaT;
     private GoogleApiClient apiClient;
     private static final String LOGTAG = "android-localizacion";
 
     //Circulo con radio de 100m
     //y centro (42.236954, -8.712717)
-    LatLng center = new LatLng(42.236954, -8.712717);
+    LatLng center = new LatLng(42.23701647941035, -8.71255248785019);
     int radius = 100;
 
     @Override
@@ -130,13 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapClick(LatLng latLng) {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(apiClient);
@@ -166,6 +160,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Toast.makeText(this, distancia+" metros ", Toast.LENGTH_LONG).show();
 
+
+
         if(distMet<=20){
             marcaT.setVisible(true);
         }else {
@@ -179,11 +175,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (loc != null) {
             lat1=loc.getLatitude();
             lng1=loc.getLongitude();
-            //Tosat para saber longitud y latitud de mi posicion
-            // Toast.makeText(this, String.valueOf(lat1)+" "+String.valueOf(lng1), Toast.LENGTH_LONG).show();
+            //Identifica nuestra posicion y la actualiza constantemente
         } else {
-
-            Toast.makeText(this, "Latitud y Longitud desconocidas", Toast.LENGTH_LONG).show();
+            //Si no es capaz de identificar nuestra posicion, nos muestra un toast que indica que no es capaz de encontrar nuestra posicion
+            Toast.makeText(this, "Latitud y Longitud no encontradas", Toast.LENGTH_LONG).show();
 
         }
 
